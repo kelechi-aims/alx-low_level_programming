@@ -1,8 +1,8 @@
 #include <stdio.h>
-/*
- * outputs the string with a new line
- * main is the entry piont
- * returning the value 0
+/**
+ * main - The entry point
+ *
+ * Return: The value 0
  */
 
 int main(void)
