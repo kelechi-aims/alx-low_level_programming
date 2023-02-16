@@ -1,7 +1,7 @@
 #include <stdio.h>
 /*
  * outputs the string with a new line
- *
+ * main is the entry piont
  * returning the value 0
  */
 
