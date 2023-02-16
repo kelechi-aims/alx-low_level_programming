@@ -5,3 +5,5 @@
 4-puts.c is a C program that prints a sententce followed by a new line using the puts function
 5-printf.c is a C program that prints a sentence followed by a new line using the printf function
 6-size.c is a C program that prints the size of various types on the computer it is compiled and run on
+100-intel is a script that generates the assembly code (Intel syntax) os a C code and save it in an output file
+101-quote.c is a C program that prints the a specific message, followed by a new line, to the standard error
