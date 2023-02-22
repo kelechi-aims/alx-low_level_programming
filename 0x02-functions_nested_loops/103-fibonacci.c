@@ -13,6 +13,7 @@ int main(void)
 	fn = 1;
 	sn = 2;
 	fb = 2;
+	fb = 2;
 	while (fb <= 4000000)
 	{
 		fb = fn + sn;
@@ -23,6 +24,6 @@ int main(void)
 			fb += fn;
 		}
 	}
-	printf("%ld\n", fn);
+	printf("%ld\n", fb);
 	return (0);
 }
