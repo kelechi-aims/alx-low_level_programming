@@ -9,10 +9,10 @@
 int main(void)
 {
 	int i;
-	long fn = 0, sn = 1, fb;
-	long n1, n2, n3, n4, sum1, sum2;
+	unsigned long fn = 0, sn = 1, fb;
+	unsigned long n1, n2, n3, n4, sum1, sum2;
 
-	for (i = 0; i < 92; ++i)
+	for (i = 0; i < 80; ++i)
 	{
 		fb = fn + sn;
 		printf("%ld, ", fb);
@@ -23,7 +23,7 @@ int main(void)
 	n2 = fn % 10000000000;
 	n3 = sn / 10000000000;
 	n4 = sn % 10000000000;
-	for (i = 93; i < 98; ++i)
+	for (i = 81; i < 98; ++i)
 	{
 		sum1 = n1 + n3;
 		sum2 = n2 + n4;
