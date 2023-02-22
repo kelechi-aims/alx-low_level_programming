@@ -8,12 +8,12 @@
 
 int main(void)
 {
-	long int fn, sn, fb;
+	long int fn, sn, fb, efb;
 
 	fn = 1;
 	sn = 2;
 	fb = 2;
-	fb = 2;
+	efb = 2;
 	while (fb <= 4000000)
 	{
 		fb = fn + sn;
@@ -21,9 +21,9 @@ int main(void)
 		sn = fb;
 		if ((fn % 2) == 0)
 		{
-			fb += fn;
+			efb += fn;
 		}
 	}
-	printf("%ld\n", fb);
+	printf("%ld\n", efb);
 	return (0);
 }
