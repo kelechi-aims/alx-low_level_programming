@@ -1,1 +1,1 @@
-0x03-debugging contains project tasks for C-Debugging
+0x03-debugging
