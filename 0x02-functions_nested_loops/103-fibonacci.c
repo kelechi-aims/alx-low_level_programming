@@ -12,8 +12,8 @@ int main(void)
 
 	fn = 1;
 	sn = 2;
-	fb = 2;
-	efb = 2;
+	fb = 0;
+	efb = 0;
 	while (fb <= 4000000)
 	{
 		fb = fn + sn;
