@@ -15,7 +15,7 @@ unsigned long n1, n2, n3, n4, sum1, sum2;
 for (i = 0; i < 92; i++)
 {
 fb = fn + sn;
-printf("%ld, ", fb);
+printf("%lu, ", fb);
 fn = sn;
 sn = fb;
 }
@@ -32,7 +32,7 @@ if ((n2 + n4) > 999999999)
 sum1 += 1;
 sum2 %= 10000000000;
 }
-printf("%ld%ld", sum1, sum2);
+printf("%lu%lu", sum1, sum2);
 if (i != 98)
 {
 printf(", ");
