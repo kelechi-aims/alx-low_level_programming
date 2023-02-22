@@ -9,10 +9,10 @@
 int main(void)
 {
 	int i;
-	long fn = 1, sn = 2, fb;
+	long fn = 0, sn = 1, fb;
 	long n1, n2, n3, n4, sum1, sum2;
 
-	for (i = 1; i < 80; ++i)
+	for (i = 0; i < 80; ++i)
 	{
 		fb = fn + sn;
 		printf("%ld, ", fb);
