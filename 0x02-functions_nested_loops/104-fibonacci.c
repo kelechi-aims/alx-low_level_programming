@@ -10,7 +10,8 @@ int main(void)
 {
 int i;
 unsigned long fn = 0, sn = 1, fb;
-unsigned long n1, n2, n3, n4, sum1, sum2;
+unsigned long n1, n2, n3, n4;
+unsigned long sum1, sum2;
 
 for (i = 0; i < 92; i++)
 {
@@ -34,9 +35,8 @@ sum2 %= 10000000000;
 }
 printf("%lu%lu", sum1, sum2);
 if (i != 98)
-{
 printf(", ");
-}
+
 n1 = n3;
 n2 = n4;
 n3 = sum1;
