@@ -26,7 +26,7 @@ void print_times_table(int n)
 }
 
 /**
- * my_style - used to reduce the lines of the code
+ * mystyle - used to reduce the lines of the code
  * @n: parameter to work with
  * Return: void
  */
@@ -45,12 +45,12 @@ void mystyle(int n)
 		_putchar(',');
 		_putchar(' ');
 		_putchar(' ');
-		_putchar((n / 10) + '0');
-		_putchar((n % 10) + '0');
+		_putchar(n / 10 + '0');
+		_putchar(n % 10 + '0');
 	}
-	else 
+	else
 	{
-		_putchar(' ');
+		_putchar(',');
 		_putchar(' ');
 		_putchar(n / 100 + '0');
 		_putchar(n / 10 % 10  + '0');
