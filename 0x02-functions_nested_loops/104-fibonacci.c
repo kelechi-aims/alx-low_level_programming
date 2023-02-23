@@ -9,7 +9,7 @@
 int main(void)
 {
 int i;
-unsigned long fn = 0, sn = 1, fb;
+unsigned long fn = 1, sn = 2, fb;
 unsigned long n1, n2, n3, n4;
 unsigned long sum1, sum2;
 
