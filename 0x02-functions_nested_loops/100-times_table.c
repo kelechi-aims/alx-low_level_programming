@@ -23,32 +23,39 @@ void print_times_table(int n)
 				{
 					_putchar(k + '0');
 				}
-				if (k <= 9)
-				{
-					_putchar(',');
-					_putchar(' ');
-					_putchar(' ');
-					_putchar(' ');
-					_putchar(k + '0');
-				}
-				else if (k <= 99)
-				{
-					_putchar(',');
-					_putchar(' ');
-					_putchar(' ');
-					_putchar((k / 10) + '0');
-					_putchar((k % 10) + '0');
-				}
-				else
-				{
-					_putchar(' ');
-					_putchar(' ');
-					_putchar(((k / 100) % 10) + '0');
-					_putchar(((k / 10) % 10) + '0');
-					_putchar((k % 10) + '0');
-				}
 			}
 			_putchar('\n');
 		}
+	}
+}
+
+/**
+ * my_style - used to reduce the lines of the code
+ * @n: parameter to work with
+ * Return: void
+ */
+void my_style(int n)
+{
+	if (k <= 9)
+	{
+		_putchar(',');
+		_putchar(' ');
+		_putchar(' ');
+		_putchar(' ');
+		_putchar(k + '0');
+	}
+	else if (k > 9 && k <= 99);
+	{
+		_putchar(',');
+		_putchar(' ');
+		_putchar(' ');
+		_putchar((k / 10) + '0');
+		_putchar((k % 10) + '0');
+	}
+	else 
+	{
+		_putchar(' ');
+		_putchar(' ');
+		_putchar(((k / 100) % 10) + '0');
 	}
 }
