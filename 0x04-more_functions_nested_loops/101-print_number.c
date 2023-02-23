@@ -31,7 +31,7 @@ void print_number(int n)
  */
 void print_num(int q)
 {
-	int i = 1000000000;
+	unsigned int i = 1000000000;
 
 	for (; i >= 1; i /= 10)
 	{
