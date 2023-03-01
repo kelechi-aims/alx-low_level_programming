@@ -2,8 +2,8 @@
 
 /**
  * *_strncat - concatenates two strings
- * @dest: first character parameter
- * @src: second charater parameter
+ * @dest: string where src string is append to
+ * @src: string that is append to the dest string
  * @n: third parameter and an integer
  *
  * Return: dest
