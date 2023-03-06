@@ -5,7 +5,6 @@
  * @s: destination string
  * @b: source string
  * @n: number of bytes to occupy
- * 
  * Return: a pointer to the memory area s
  */
 char *_memset(char *s, char b, unsigned int n)
