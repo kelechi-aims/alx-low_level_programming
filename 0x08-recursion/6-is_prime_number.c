@@ -2,7 +2,7 @@
 int is_not_prime(int n, int x);
 
 /**
- * is_prime_number - returns 1 if the input integer is a 
+ * is_prime_number - returns 1 if the input integer is a
  * prime number otherwise return 0
  * @n: integer parameter
  * Return: integer
