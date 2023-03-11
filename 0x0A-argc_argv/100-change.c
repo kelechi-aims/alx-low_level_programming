@@ -3,7 +3,7 @@
 #include <ctype.h>
 
 /**
- * prints the minimum number of coins to make change
+ * main - prints the minimum number of coins to make change
  * for an amount of money
  * @argc: argument counter
  * @argv: argument vector
@@ -50,7 +50,7 @@ int main(int argc, char *argv[])
 		{
 			cents -= 1;
 			continue;
-		}	
+		}
 	}
 	printf("%d\n", coins);
 	return (0);
