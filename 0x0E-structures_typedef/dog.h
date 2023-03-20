@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 /**
- * dog - user data type
+ * struct dog - user data type
  * @name: first parameter
  * @age: second parameter
  * @owner: third parameter
@@ -14,5 +14,6 @@ struct dog
 	float age;
 	char *owner;
 };
+
 
 #endif
