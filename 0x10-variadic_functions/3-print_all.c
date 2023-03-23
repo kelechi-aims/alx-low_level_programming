@@ -33,11 +33,9 @@ void print_all(const char * const format, ...)
 				if (s == NULL)
 				{
 					printf("(nil)");
+					break;
 				}
-				else
-				{
-					printf("%s", s);
-				}
+				printf("%s", s);
 				break;
 		}
 		if ((format[j] == 'i' || format[j] == 'c' || format[j] == 'f'
