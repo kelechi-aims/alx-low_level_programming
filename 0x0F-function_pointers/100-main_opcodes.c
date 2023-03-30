@@ -9,7 +9,7 @@
  */
 int main(int argc, char *argv[])
 {
-	int number_of_bytes, i;
+	int number_of_bytes, i = 0;
 	unsigned char *fun;
 
 	if (argc != 2)
@@ -24,10 +24,13 @@ int main(int argc, char *argv[])
 		exit(2);
 	}
 	fun = (unsigned char *)main;
-	for (i = 0; i < number_of_bytes; i++)
+	if (number_of_bytes > 0)
 	{
-		printf("%02x ", fun[i]);
+		while (i < number_of_bytes - 1)
+		{
+			printf("%02x ", fun[i++]);
+		}
+		printf("%x\n", fun[i]);
 	}
-	printf("\n");
 	return (0);
 }
