@@ -19,7 +19,7 @@ unsigned int binary_to_uint(const char *b)
 		{
 			return (0);
 		}
-		con_num = con_num * 2 + (b[i] - '0'); 
+		con_num = con_num * 2 + (b[i] - '0');
 	}
 	return (con_num);
 }
