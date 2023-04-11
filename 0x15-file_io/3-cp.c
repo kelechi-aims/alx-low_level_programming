@@ -18,8 +18,8 @@ int main(int argc, char *argv[])
 		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
 		exit(97);
 	}
+	file_to = open(argv[2], O_WRONLY | O_TRUNC | O_CREAT, 0664);
 	file_from = open(argv[1], O_RDONLY);
-	file_to = open(argv[2], O_CREAT | O_TRUNC | O_WRONLY | O_APPEND, 0664);
 	print_error(file_from, file_to, argv);
 	while (read_letts == 1024)
 	{
