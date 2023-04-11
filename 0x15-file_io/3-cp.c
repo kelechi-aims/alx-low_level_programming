@@ -53,7 +53,7 @@ int main(int argc, char *argv[])
  * print_error - prints error message
  * @file_from: first argument
  * @file_to: second argument
- * argv: third agument
+ * @argv: third agument
  * Return: void
  */
 void print_error(int file_from, int file_to, char *argv[])
