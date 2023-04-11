@@ -1,5 +1,6 @@
 #include "main.h"
 
+void print_error(int file_from, int file_to, char *argv[]);
 /**
  * main - copies the content of a file to another file
  * @argc: argument counter
@@ -18,30 +19,19 @@ int main(int argc, char *argv[])
 		exit(97);
 	}
 	file_from = open(argv[1], O_RDONLY);
-	if (file_from == -1)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
-		exit(98);
-	}
 	file_to = open(argv[2], O_CREAT | O_TRUNC | O_WRONLY | O_APPEND, 0664);
-	if (file_to == -1)
+	print_error(file_from, file_to, argv);
+	while (read_letts == 1024)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
-		exit(99);
-	}
-	read_letts = read(file_from, buff, 1024);
-	if (read_letts == -1)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
-		exit(98);
-	}
-	while (read_letts > 0)
-	{
-		write_letts = write(file_to, buff, read_letts);
-		if (write_letts != read_letts)
+		read_letts = read(file_from, buff, 1024);
+		if (read_letts == -1)
 		{
-			dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
-			exit(99);
+			print_error(-1, 0, argv);
+		}
+		write_letts = write(file_to, buff, read_letts);
+		if (write_letts == -1)
+		{
+			print_error(0, -1, argv);
 		}
 	}
 	file_close = close(file_from);
@@ -57,4 +47,25 @@ int main(int argc, char *argv[])
 		exit(100);
 	}
 	return (0);
+}
+
+/**
+ * print_error - prints error message
+ * @file_from: first argument
+ * @file_to: second argument
+ * argv: third agument
+ * Return: void
+ */
+void print_error(int file_from, int file_to, char *argv[])
+{
+	if (file_from == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
+		exit(98);
+	}
+	if (file_to == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
+		exit(99);
+	}
 }
