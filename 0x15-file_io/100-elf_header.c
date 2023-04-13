@@ -14,6 +14,7 @@
 int elf_checker(char *ppt)
 {
 	int ppt1 = (int)ppt[0];
+
 	if (ppt1 == 127 && ppt[1] == 'E' && ppt[2] == 'L' && ppt[3] == 'F')
 	{
 		return (1);
@@ -65,7 +66,7 @@ void _class(char *ppt)
 void _data(char *ppt)
 {
 	char dt = ppt[5] + '0';
-	
+
 	if (dt == '1')
 	{
 		printf("  Data:                             2's complement, little edian\n");
@@ -104,7 +105,7 @@ void os_abi(char *ppt)
 	}
 	else if (ppt[7] == 1)
 	{
-		printf("  OS/ABI:                             UNIX - HP-UX\n");	
+		printf("  OS/ABI:                             UNIX - HP-UX\n");
 	}
 	else if (ppt[7] == 2)
 	{
@@ -226,7 +227,7 @@ int main(int argc, char *argv[])
 	int fd, read_elf;
 	char buff[16];
 
-	if(argc != 2)
+	if (argc != 2)
 	{
 		dprintf(STDERR_FILENO, "Usage: %s elf_filename\n", argv[0]);
 		exit(98);
@@ -235,7 +236,7 @@ int main(int argc, char *argv[])
 	if (fd == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: could not open file\n");
-		exit(98);		
+		exit(98);
 	}
 	lseek(fd, 0, SEEK_SET);
 	read_elf = read(fd, buff, 16);
