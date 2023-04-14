@@ -225,7 +225,7 @@ void _address(char *ppt)
 int main(int argc, char *argv[])
 {
 	int fd, read_elf;
-	char buff[16];
+	char buff[64];
 
 	if (argc != 2)
 	{
@@ -239,7 +239,7 @@ int main(int argc, char *argv[])
 		exit(98);
 	}
 	lseek(fd, 0, SEEK_SET);
-	read_elf = read(fd, buff, 16);
+	read_elf = read(fd, buff, 64);
 	if (read_elf == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: could not read ELF header\n");
