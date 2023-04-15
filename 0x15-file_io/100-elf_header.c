@@ -31,10 +31,10 @@ void _magic(char *ppt)
 {
 	int i;
 
-	printf("  Magic:   ");
+	printf("  Magic:  ");
 	for (i = 0; i < 16; i++)
 	{
-		printf("%02x ", ppt[i]);
+		printf(" %02x", ppt[i]);
 	}
 	printf("\n");
 }
@@ -84,12 +84,14 @@ void _data(char *ppt)
  */
 void _version(char *ppt)
 {
-	char vrs = ppt[6] + '0';
+	char vrs = ppt[6];
 
+	printf("  Version:                             %d", vrs);
 	if (vrs == EV_CURRENT)
 	{
-		printf("  Version:                             %d (current)\n", vrs);
+		printf(" (current)");
 	}
+	printf("\n");
 }
 
 /**
