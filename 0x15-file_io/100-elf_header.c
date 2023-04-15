@@ -50,7 +50,7 @@ void _class(char *ppt)
 
 	if (cls == '1')
 	{
-		printf("  Class:                              ELF32\n");
+		printf("  Class:                            ELF32\n");
 	}
 	if (cls == '2')
 	{
