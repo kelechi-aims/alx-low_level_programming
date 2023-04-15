@@ -69,11 +69,11 @@ void _data(char *ppt)
 
 	if (dt == '1')
 	{
-		printf("  Data:                             2's complement, little edian\n");
+		printf("  Data:                              2's complement, little edian\n");
 	}
 	if (dt == '2')
 	{
-		printf("  Data:                             2's complement, big edian\n");
+		printf("  Data:                              2's complement, big edian\n");
 	}
 }
 
@@ -86,7 +86,7 @@ void _version(char *ppt)
 {
 	char vrs = ppt[6];
 
-	printf("  Version:                             %d", vrs);
+	printf("  Version:                            %d", vrs);
 	if (vrs == EV_CURRENT)
 	{
 		printf(" (current)");
@@ -154,27 +154,27 @@ void _type(char *ppt)
 	}
 	if (tp == 0)
 	{
-		printf("  Type:                             NONE (No file type)\n");
+		printf("  Type:                              NONE (No file type)\n");
 	}
 	else if (tp == 1)
 	{
-		printf("  Type:                             REL (Relocatable file)\n");
+		printf("  Type:                              REL (Relocatable file)\n");
 	}
 	else if (tp == 2)
 	{
-		printf("  Type:                             EXEC (Executable file)\n");
+		printf("  Type:                              EXEC (Executable file)\n");
 	}
 	else if (tp == 3)
 	{
-		printf("  Type:                             DYN (Shared file)\n");
+		printf("  Type:                              DYN (Shared file)\n");
 	}
 	else if (tp == 4)
 	{
-		printf("  Type:                             CORE (Core file)\n");
+		printf("  Type:                              CORE (Core file)\n");
 	}
 	else
 	{
-		printf("  Type:                             <Unknown: %x>\n", tp);
+		printf("  Type:                              <Unknown: %x>\n", tp);
 	}
 }
 
@@ -188,7 +188,7 @@ void _address(char *ppt)
 	int i, strt;
 	char cls = ppt[4] + '0';
 
-	printf("  Entry point address:                             0x");
+	printf("  Entry point address:      0x");
 	if (cls == '1')
 	{
 		strt = 26;
@@ -258,7 +258,7 @@ int main(int argc, char *argv[])
 	_data(buff);
 	_version(buff);
 	os_abi(buff);
-	printf("  ABI Version:                             %d\n", buff[8]);
+	printf("  ABI Version:                           %d\n", buff[8]);
 	_type(buff);
 	_address(buff);
 	close(fd);
