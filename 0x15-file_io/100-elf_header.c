@@ -50,11 +50,11 @@ void _class(char *ppt)
 
 	if (cls == '1')
 	{
-		printf("  Class:			ELF32\n");
+		printf("  Class:\t\t\tELF32\n");
 	}
 	if (cls == '2')
 	{
-		printf("  Class:			ELF64\n");
+		printf("  Class:\t\t\tELF64\n");
 	}
 }
 
@@ -69,11 +69,11 @@ void _data(char *ppt)
 
 	if (dt == '1')
 	{
-		printf("  Data:				2's complement, little edian\n");
+		printf("  Data:\t\t\t\t2's complement, little edian\n");
 	}
 	if (dt == '2')
 	{
-		printf("  Data:				2's complement, big edian\n");
+		printf("  Data:\t\t\t\t2's complement, big edian\n");
 	}
 }
 
@@ -86,7 +86,7 @@ void _version(char *ppt)
 {
 	char vrs = ppt[6];
 
-	printf("  Version:				%d", vrs);
+	printf("  Version:\t\t\t\t%d", vrs);
 	if (vrs == EV_CURRENT)
 	{
 		printf(" (current)");
@@ -103,35 +103,35 @@ void os_abi(char *ppt)
 {
 	if (ppt[7] == 0)
 	{
-		printf("  OS/ABI:			UNIX - Sysyem V\n");
+		printf("  OS/ABI:\t\t\tUNIX - Sysyem V\n");
 	}
 	else if (ppt[7] == 1)
 	{
-		printf("  OS/ABI:			UNIX - HP-UX\n");
+		printf("  OS/ABI:\t\t\tUNIX - HP-UX\n");
 	}
 	else if (ppt[7] == 2)
 	{
-		printf("  OS/ABI:			UNIX - NetBSD\n");
+		printf("  OS/ABI:\t\t\tUNIX - NetBSD\n");
 	}
 	else if (ppt[7] == 3)
 	{
-		printf("  OS/ABI:			UNIX - Linux\n");
+		printf("  OS/ABI:\t\t\tUNIX - Linux\n");
 	}
 	else if (ppt[7] == 6)
 	{
-		printf("  OS/ABI:			UNIX - Solaris\n");
+		printf("  OS/ABI:\t\t\tUNIX - Solaris\n");
 	}
 	else if (ppt[7] == 8)
 	{
-		printf("  OS/ABI:			UNIX -IRIX\n");
+		printf("  OS/ABI:\t\t\tUNIX -IRIX\n");
 	}
 	else if (ppt[7] == 9)
 	{
-		printf("  OS/ABI:			UNIX - FreeBSD\n");
+		printf("  OS/ABI:\t\t\tUNIX - FreeBSD\n");
 }
 	else
 	{
-		printf("  OS/ABI:			<unknown: %x>\n", ppt[7]);
+		printf("  OS/ABI:\t\t\t<unknown: %x>\n", ppt[7]);
 	}
 }
 
@@ -154,27 +154,27 @@ void _type(char *ppt)
 	}
 	if (tp == 0)
 	{
-		printf("  Type:				NONE (No file type)\n");
+		printf("  Type:\t\t\t\tNONE (No file type)\n");
 	}
 	else if (tp == 1)
 	{
-		printf("  Type:				REL (Relocatable file)\n");
+		printf("  Type:\t\t\t\tREL (Relocatable file)\n");
 	}
 	else if (tp == 2)
 	{
-		printf("  Type:				EXEC (Executable file)\n");
+		printf("  Type:\t\t\t\tEXEC (Executable file)\n");
 	}
 	else if (tp == 3)
 	{
-		printf("  Type:				DYN (Shared file)\n");
+		printf("  Type:\t\t\t\tDYN (Shared file)\n");
 	}
 	else if (tp == 4)
 	{
-		printf("  Type:				CORE (Core file)\n");
+		printf("  Type:\t\t\t\tCORE (Core file)\n");
 	}
 	else
 	{
-		printf("  Type:				<Unknown: %x>\n", tp);
+		printf("  Type:\t\t\t\t<Unknown: %x>\n", tp);
 	}
 }
 
@@ -188,7 +188,7 @@ void _address(char *ppt)
 	int i, strt;
 	char cls = ppt[4] + '0';
 
-	printf("  Entry point address:		0x");
+	printf("  Entry point address:\t\t0x");
 	if (cls == '1')
 	{
 		strt = 26;
@@ -258,7 +258,7 @@ int main(int argc, char *argv[])
 	_data(buff);
 	_version(buff);
 	os_abi(buff);
-	printf("   ABI Version:				%d\n", buff[8]);
+	printf("   ABI Version:\t\t\t\t%d\n", buff[8]);
 	_type(buff);
 	_address(buff);
 	close(fd);
