@@ -34,7 +34,7 @@ void _magic(char *ppt)
 	printf("  Magic:   ");
 	for (i = 0; i < 16; i++)
 	{
-		printf("%02x", ppt[i]);
+		printf("%02x ", ppt[i]);
 	}
 	printf("\n");
 }
@@ -60,7 +60,7 @@ void _class(char *ppt)
 
 /**
  * _data - prints the data encoding in the ELf file
- * :@ppt: a pointer to the header of the ELF file
+ * @ppt: a pointer to the header of the ELF file
  * Return: nothing
  */
 void _data(char *ppt)
@@ -86,7 +86,7 @@ void _version(char *ppt)
 {
 	char vrs = ppt[6] + '0';
 
-	if (vrs == '1')
+	if (vrs == EV_CURRENT)
 	{
 		printf("  Version:                             %d (current)\n", vrs);
 	}
@@ -252,6 +252,7 @@ int main(int argc, char *argv[])
 	}
 	printf("ELF Header:\n");
 	_magic(buff);
+	_class(buff);
 	_data(buff);
 	_version(buff);
 	os_abi(buff);
