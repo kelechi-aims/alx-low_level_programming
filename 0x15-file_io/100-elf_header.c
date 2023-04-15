@@ -69,7 +69,7 @@ void _data(char *ppt)
 
 	if (dt == '1')
 	{
-		printf("  Data:                              2's complement, little edian\n");
+		printf("  Data:                            2's complement, little edian\n");
 	}
 	if (dt == '2')
 	{
@@ -86,7 +86,7 @@ void _version(char *ppt)
 {
 	char vrs = ppt[6];
 
-	printf("  Version:                   %d", vrs);
+	printf("  Version:                         %d", vrs);
 	if (vrs == EV_CURRENT)
 	{
 		printf(" (current)");
@@ -258,7 +258,7 @@ int main(int argc, char *argv[])
 	_data(buff);
 	_version(buff);
 	os_abi(buff);
-	printf("   ABI Version:           %d\n", buff[8]);
+	printf("   ABI Version:                    %d\n", buff[8]);
 	_type(buff);
 	_address(buff);
 	close(fd);
