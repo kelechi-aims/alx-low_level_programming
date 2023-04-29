@@ -8,213 +8,228 @@
 
 /**
  * elf_checker - checks if file is an elf file
- * @ppt: a pointer to magic number
+ * @e_ident: a pointer to magic number
  * Return: 1 if elf, else 0
  */
-int elf_checker(char *ppt)
+void elf_checker(unsigned char *e_ident)
 {
-	int ppt1 = (int)ppt[0];
+	int i;
 
-	if (ppt1 == 127 && ppt[1] == 'E' && ppt[2] == 'L' && ppt[3] == 'F')
+	for (i = 0; i <= 4; i++)
 	{
-		return (1);
+		if (e_ident[i] != 127 &&
+			e_ident[i] != 'E' &&
+			e_ident[i] != 'L' &&
+			e_ident[i] != 'F')
+		{
+			dprintf(STDERR_FILENO, "Error: file is not an ELF file\n");
+			exit(98);
+		}
 	}
-	return (0);
 }
 
 /**
  * _magic - prints the magic number of the ELF file
- * @ppt: a pointer to the header of the ELF file
+ * @e_ident: a pointer to the header of the ELF file
  * Return: nothing
  */
-void _magic(char *ppt)
+void _magic(unsigned char *e_ident)
 {
 	int i;
 
 	printf("  Magic:  ");
-	for (i = 0; i < 16; i++)
+	for (i = 0; i < EI_NIDENT; i++)
 	{
-		printf(" %02x", ppt[i]);
+		printf("%02x", e_ident[i]);
+		if (i == EI_NIDENT - 1)
+		{
+			printf("\n");
+		}
+		else
+		{
+			printf(" ");
+		}
 	}
-	printf("\n");
 }
 
 /**
  * _class - prints the class of the ELF file
- * @ppt: a pointer to the header of the ELF file
+ * @e_ident: a pointer to the header of the ELF file
  * Return: nothing
  */
-void _class(char *ppt)
+void _class(unsigned char *e_ident)
 {
-	char cls = ppt[4] + '0';
-
-	if (cls == '1')
-	{
-		printf("  Class:                             ELF32\n");
-	}
-	if (cls == '2')
-	{
-		printf("  Class:                             ELF64\n");
-	}
+		printf("  Class:                            ");
+		switch (e_ident[EI_CLASS])
+		{
+		case ELFCLASSNONE:
+			printf("none\n");
+			break;
+		case ELFCLASS32:
+			printf("ELF32\n");
+			break;
+		case ELFCLASS64:
+			printf("ELF64\n");
+			break;
+		default:
+			printf("<unknown: %x>\n", e_ident[EI_NIDENT]);
+			break;
+		}
 }
 
 /**
  * _data - prints the data encoding in the ELf file
- * @ppt: a pointer to the header of the ELF file
+ * @e_ident: a pointer to the header of the ELF file
  * Return: nothing
  */
-void _data(char *ppt)
+void _data(unsigned char *e_ident)
 {
-	char dt = ppt[5] + '0';
-
-	if (dt == '1')
+	printf("  Data:                            ");
+	switch (e_ident[EI_DATA])
 	{
-		printf("  Data:                            2's complement, little edian\n");
-	}
-	if (dt == '2')
-	{
-		printf("  Data:                              2's complement, big edian\n");
+		case ELFDATANONE:
+			printf("none\n");
+			break;
+		case ELFDATA2LSB:
+			printf("2's complement, little endian\n");
+			break;
+		case ELFDATA2MSB:
+			printf("2's complement, bid endian\n");
+			break;
+		default:
+			printf("<unknown: %x>\n", e_ident[EI_CLASS]);
+			break;
 	}
 }
 
 /**
  * _version - prints the version of the ELF file format
- * @ppt: a pointer to the header of the ELF file
+ * @e_ident: a pointer to the header of the ELF file
  * Return: void
  */
-void _version(char *ppt)
+void _version(unsigned char *e_ident)
 {
-	char vrs = ppt[6];
-
-	printf("  Version:                         %d", vrs);
-	if (vrs == EV_CURRENT)
+	printf("  Version:                            ");
+	switch (e_ident[EI_VERSION])
 	{
-		printf(" (current)");
+		case EV_CURRENT:
+			printf(" (current)");
+			break;
+		default:
+			printf("\n");
+			break;
 	}
-	printf("\n");
 }
-
 /**
  * os_abi - prints the OS/ABI of the ELF file
- * @ppt: a pointer to the header of the ELF file
+ * @e_ident: a pointer to the header of the ELF file
  * Return: void
  */
-void os_abi(char *ppt)
+void os_abi(unsigned char *e_ident)
 {
-	if (ppt[7] == 0)
+	printf("  OS/ABI:                            ");
+	switch (e_ident[EI_OSABI])
 	{
-		printf("  OS/ABI:                             UNIX - Sysyem V\n");
-	}
-	else if (ppt[7] == 1)
-	{
-		printf("  OS/ABI:                             UNIX - HP-UX\n");
-	}
-	else if (ppt[7] == 2)
-	{
-		printf("  OS/ABI:                             UNIX - NetBSD\n");
-	}
-	else if (ppt[7] == 3)
-	{
-		printf("  OS/ABI:                             UNIX - Linux\n");
-	}
-	else if (ppt[7] == 6)
-	{
-		printf("  OS/ABI:                             UNIX - Solaris\n");
-	}
-	else if (ppt[7] == 8)
-	{
-		printf("  OS/ABI:                             UNIX -IRIX\n");
-	}
-	else if (ppt[7] == 9)
-	{
-		printf("  OS/ABI:                             UNIX - FreeBSD\n");
-}
-	else
-	{
-		printf("  OS/ABI:                             <unknown: %x>\n", ppt[7]);
+		case ELFOSABI_NONE:
+			printf("UNIX - Sysyem V\n");
+			break;
+		case ELFOSABI_HPUX:
+			printf("UNIX - HP-UX\n");
+			break;
+		case ELFOSABI_NETBSD:
+			printf("UNIX - NetBSD\n");
+			break;
+		case ELFOSABI_LINUX:
+			printf("UNIX - Linux\n");
+			break;
+		case ELFOSABI_SOLARIS:
+			printf("UNIX - Solaris\n");
+			break;
+		case ELFOSABI_IRIX:
+			printf("UNIX - FreeBSD\n");
+			break;
+		case ELFOSABI_TRU64:
+			printf("UNIX - TRU64\n");
+			break;
+		case ELFOSABI_ARM:
+			printf("ARM architecture\n");
+			break;
+		case ELFOSABI_STANDALONE:
+			printf("Standalone (embedded)\n");
+			break;
+		default:
+			printf("<unknown: %x>\n", e_ident[EI_OSABI]);
+			break;
 	}
 }
 
+/**
+ * _abi - prints the ABI Version of the Elf file
+ * @e_indent - a pointer to the header of the ELF file
+ * Return: void
+ */
+void _abi(unsigned char *e_ident)
+{
+	printf("  ABI Version:                           %x\n ",
+		     e_ident[EI_ABIVERSION]);
+}
 /**
  * _type - prints the type of the ELF file
- * @ppt: a pointer to the header of an ELF file
+ * @e_type: a pointer to the header of an ELF file
+ * @e_ident: a pointer
  * Return: void
  */
-void _type(char *ppt)
+void _type(unsigned int e_type, unsigned char *e_ident)
 {
-	char tp = ppt[16];
-
-	if (ppt[5] == 1)
+	if (e_ident[EI_DATA] == ELFDATA2MSB)
 	{
-		tp = ppt[16];
+		e_type >>= 8;
 	}
-	else
+	printf("  Type:                            ");
+	switch (e_type)
 	{
-		tp = ppt[17];
-	}
-	if (tp == 0)
-	{
-		printf("  Type:                              NONE (No file type)\n");
-	}
-	else if (tp == 1)
-	{
-		printf("  Type:                              REL (Relocatable file)\n");
-	}
-	else if (tp == 2)
-	{
-		printf("  Type:                              EXEC (Executable file)\n");
-	}
-	else if (tp == 3)
-	{
-		printf("  Type:                              DYN (Shared file)\n");
-	}
-	else if (tp == 4)
-	{
-		printf("  Type:                              CORE (Core file)\n");
-	}
-	else
-	{
-		printf("  Type:                              <Unknown: %x>\n", tp);
+		case ET_NONE:
+			printf("NONE (An unknown type)\n");
+			break;
+		case ET_REL:
+			printf("REL (Relocatable file");
+			break;
+		case ET_EXEC:
+			printf("(Executable file)\n");
+			break;
+		case ET_DYN:
+			printf("DYN (Shared file)\n");
+			break;
+		case ET_CORE:
+			printf("CORE (Core file)\n");
+			break;
+		default:
+			printf("<Unknown: %x>\n", e_type);
+			break;
 	}
 }
-
 /**
  * _address - prints the entry point address
- * @ppt:  a pointer to the header of the ELF file
+ * @e_entry:  a pointer to the header of the ELF file
+ * @e_ident: a pointer
  * Return: void
  */
-void _address(char *ppt)
+void _address(unsigned int e_entry, unsigned char *e_ident)
 {
-	int i, strt;
-	char cls = ppt[4] + '0';
-
-	printf("  Entry point address:                       0x");
-	if (cls == '1')
+	printf(" Entry point address:                            ");
+	if (e_ident[EI_CLASS] == ELFCLASS32)
 	{
-		strt = 26;
-		printf("80");
-		for (i = strt; i >= 22; i--)
-		{
-			if (ppt[i] > 0)
-				printf("%x", ppt[i]);
-			else
-				printf("%x", 256 + ppt[i]);
-		}
-		if (ppt[7] == 6)
-			printf("00");
+		printf("%#x\n", (unsigned int)e_entry);
 	}
-	if (cls == '2')
+	else if (e_ident[EI_DATA == ELFDATA2MSB])
 	{
-		strt = 26;
-		for (i = strt; i > 23; i--)
-		{
-			if (ppt[i] >= 0)
-				printf("%02x", ppt[i]);
-			else
-				printf("%02x", 256 + ppt[i]);
-		}
+		e_entry = ((e_entry << 8) & 0xFF00FF00) | ((e_entry >> 8) & 0xFF00FF);
+		e_entry = ((e_entry << 16) | e_entry >> 16);
 	}
-	printf("\n");
+	else
+	{
+		printf("%#x\n", e_entry);
+	}
 }
 
 /**
@@ -226,8 +241,8 @@ void _address(char *ppt)
  */
 int main(int argc, char *argv[])
 {
+	Elf64_Ehdr *elf_header;
 	int fd, read_elf;
-	char buff[64];
 
 	if (argc != 2)
 	{
@@ -240,27 +255,29 @@ int main(int argc, char *argv[])
 		dprintf(STDERR_FILENO, "Error: could not open file\n");
 		exit(98);
 	}
-	lseek(fd, 0, SEEK_SET);
-	read_elf = read(fd, buff, 64);
+	elf_header = malloc(sizeof(Elf64_Ehdr));
+	if (elf_header == NULL)
+	{
+		dprintf(STDERR_FILENO, "can't allocate memory\n");
+		exit(98);
+	}
+	read_elf = read(fd, elf_header, sizeof(Elf64_Ehdr));
 	if (read_elf == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: could not read ELF header\n");
 		exit(98);
 	}
-	if (!elf_checker(buff))
-	{
-		dprintf(STDERR_FILENO, "Error: %s is not an ELF file\n", argv[1]);
-		exit(98);
-	}
+	elf_checker(elf_header->e_ident);
 	printf("ELF Header:\n");
-	_magic(buff);
-	_class(buff);
-	_data(buff);
-	_version(buff);
-	os_abi(buff);
-	printf("   ABI Version:                    %d\n", buff[8]);
-	_type(buff);
-	_address(buff);
+	 _magic(elf_header->e_ident);
+	_class(elf_header->e_ident);
+	_data(elf_header->e_ident);
+	_version(elf_header->e_ident);
+	os_abi(elf_header->e_ident);
+	_abi(elf_header->e_ident);
+	_type(elf_header->e_type, elf_header->e_ident);
+	_address(elf_header->e_type, elf_header->e_ident);
+	free(elf_header);
 	close(fd);
 	return (0);
 }
