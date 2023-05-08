@@ -15,7 +15,7 @@ void elf_checker(unsigned char *e_ident)
 {
 	int i;
 
-	for (i = 0; i <= 3; i++)
+	for (i = 0; i < 4; i++)
 	{
 		if (e_ident[i] != 127 &&
 			e_ident[i] != 'E' &&
@@ -166,12 +166,12 @@ void os_abi(unsigned char *e_ident)
 
 /**
  * _abi - prints the ABI Version of the Elf file
- * @e_indent - a pointer to the header of the ELF file
+ * @e_ident - a pointer to the header of the ELF file
  * Return: void
  */
 void _abi(unsigned char *e_ident)
 {
-	printf("  ABI Version:                       %d\n",
+	printf("  ABI Version:                       %x\n",
 		     e_ident[EI_ABIVERSION]);
 }
 /**
@@ -218,14 +218,14 @@ void _type(unsigned int e_type, unsigned char *e_ident)
 void _address(unsigned int e_entry, unsigned char *e_ident)
 {
 	printf("  Entry point address:               ");
-	if (e_ident[EI_CLASS] == ELFCLASS32)
-	{
-		printf("%#lx\n", (unsigned int)e_entry);
-	}
-	else if (e_ident[EI_DATA == ELFDATA2MSB])
+	if (e_ident[EI_DATA == ELFDATA2MSB])
 	{
 		e_entry = ((e_entry << 8) & 0xFF00FF00) | ((e_entry >> 8) & 0xFF00FF);
 		e_entry = ((e_entry << 16) | e_entry >> 16);
+	}
+	if (e_ident[EI_CLASS] == ELFCLASS32)
+	{
+		printf("%#lx\n", (unsigned int)e_entry);
 	}
 	else
 	{
