@@ -17,10 +17,10 @@ void elf_checker(unsigned char *e_ident)
 
 	for (i = 0; i < 4; i++)
 	{
-		if (e_ident[i] != 127 ||
-			e_ident[i] != 'E' ||
-			e_ident[i] != 'L' ||
-			e_ident[i] != 'F')
+		if (e_ident[0] != 127 ||
+			e_ident[1] != 'E' ||
+			e_ident[2] != 'L' ||
+			e_ident[3] != 'F')
 		{
 			dprintf(STDERR_FILENO, "Error: file is not an ELF file\n");
 			exit(98);
