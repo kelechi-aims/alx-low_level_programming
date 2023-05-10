@@ -15,7 +15,7 @@ void elf_checker(unsigned char *e_ident)
 {
 	int i;
 
-	for (i = 0; i <= 4; i++)
+	for (i = 0; i < 4; i++)
 	{
 		if (e_ident[i] != 127 ||
 			e_ident[i] != 'E' ||
