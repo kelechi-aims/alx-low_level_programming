@@ -13,18 +13,13 @@
  */
 void elf_checker(unsigned char *e_ident)
 {
-	int i;
-
-	for (i = 0; i < 4; i++)
+	if (e_ident[EI_MAG0] != ELFMAG0 ||
+		e_ident[EI_MAG1] != ELFMAG1 ||
+		e_ident[EI_MAG2] != ELFMAG2 ||
+		e_ident[EI_MAG3] != ELFMAG3)
 	{
-		if (e_ident[0] != 127 ||
-			e_ident[1] != 'E' ||
-			e_ident[2] != 'L' ||
-			e_ident[3] != 'F')
-		{
-			dprintf(STDERR_FILENO, "Error: file is not an ELF file\n");
-			exit(98);
-		}
+		dprintf(STDERR_FILENO, "Error: file is not an ELF file\n");
+		exit(98);
 	}
 }
 
@@ -59,7 +54,7 @@ void _magic(unsigned char *e_ident)
  */
 void _class(unsigned char *e_ident)
 {
-		printf("  Class:                            ");
+		printf("  Class:                             ");
 		switch (e_ident[EI_CLASS])
 		{
 		case ELFCLASSNONE:
@@ -84,7 +79,7 @@ void _class(unsigned char *e_ident)
  */
 void _data(unsigned char *e_ident)
 {
-	printf("  Data:                            ");
+	printf("  Data:                              ");
 	switch (e_ident[EI_DATA])
 	{
 		case ELFDATANONE:
@@ -109,11 +104,12 @@ void _data(unsigned char *e_ident)
  */
 void _version(unsigned char *e_ident)
 {
-	printf("  Version:                            ");
+	printf("  Version:                           %d",
+			e_ident[EI_VERSION]);
 	switch (e_ident[EI_VERSION])
 	{
 		case EV_CURRENT:
-			printf(" (current)");
+			printf(" (current)\n");
 			break;
 		default:
 			printf("\n");
@@ -170,7 +166,7 @@ void os_abi(unsigned char *e_ident)
  */
 void _abi(unsigned char *e_ident)
 {
-	printf("  ABI Version:                           %x\n ",
+	printf("  ABI Version:                       %x\n",
 		     e_ident[EI_ABIVERSION]);
 }
 /**
@@ -185,7 +181,7 @@ void _type(unsigned int e_type, unsigned char *e_ident)
 	{
 		e_type >>= 8;
 	}
-	printf("  Type:                            ");
+	printf("  Type:                              ");
 	switch (e_type)
 	{
 		case ET_NONE:
@@ -195,7 +191,7 @@ void _type(unsigned int e_type, unsigned char *e_ident)
 			printf("REL (Relocatable file");
 			break;
 		case ET_EXEC:
-			printf("(Executable file)\n");
+			printf("EXEC (Executable file)\n");
 			break;
 		case ET_DYN:
 			printf("DYN (Shared file)\n");
@@ -214,22 +210,9 @@ void _type(unsigned int e_type, unsigned char *e_ident)
  * @e_ident: a pointer
  * Return: void
  */
-void _address(unsigned int e_entry, unsigned char *e_ident)
+void _address(unsigned int e_entry)
 {
-	printf(" Entry point address:                            ");
-	if (e_ident[EI_CLASS] == ELFCLASS32)
-	{
-		printf("%#x\n", (unsigned int)e_entry);
-	}
-	else if (e_ident[EI_DATA == ELFDATA2MSB])
-	{
-		e_entry = ((e_entry << 8) & 0xFF00FF00) | ((e_entry >> 8) & 0xFF00FF);
-		e_entry = ((e_entry << 16) | e_entry >> 16);
-	}
-	else
-	{
-		printf("%#x\n", e_entry);
-	}
+	printf("  Entry point address:               %#x\n", e_entry);
 }
 
 /**
@@ -276,7 +259,7 @@ int main(int argc, char *argv[])
 	os_abi(elf_header->e_ident);
 	_abi(elf_header->e_ident);
 	_type(elf_header->e_type, elf_header->e_ident);
-	_address(elf_header->e_type, elf_header->e_ident);
+	_address(elf_header->e_entry);
 	free(elf_header);
 	close(fd);
 	return (0);
