@@ -43,6 +43,5 @@ int exponential_search(int *array, size_t size, int value)
 		else
 			right = mid - 1;
 	}
-	printf("Value checked array[%lu] is out of range\n", right);
 	return (-1);
 }
